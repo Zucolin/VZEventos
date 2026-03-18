@@ -1,9 +1,6 @@
-<?php
-ob_start();
-?>
-
 <h2>Inscritos no Evento</h2>
 <a href="<?php echo BASE_URL; ?>/eventos">Voltar aos eventos</a>
+<div class="table-wrapper">
 <table>
     <thead>
         <tr>
@@ -15,15 +12,11 @@ ob_start();
     <tbody>
         <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
         <tr>
-            <td><?php echo htmlspecialchars($row['participante_nome']); ?></td>
-            <td><?php echo htmlspecialchars($row['participante_email']); ?></td>
-            <td><?php echo htmlspecialchars($row['participante_telefone']); ?></td>
+            <td><?php echo htmlspecialchars($row['nome']); ?></td>
+            <td><?php echo htmlspecialchars($row['email']); ?></td>
+            <td><?php echo htmlspecialchars($row['telefone']); ?></td>
         </tr>
         <?php endwhile; ?>
     </tbody>
 </table>
-
-<?php
-$content = ob_get_clean();
-include __DIR__ . '/../layout.php';
-?>
+</div>

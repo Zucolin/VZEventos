@@ -18,14 +18,13 @@ function view($path, $data = []) {
     // Transforma as chaves do array em variáveis (ex: $data['stmt'] vira $stmt).
     extract($data);
 
-    // Inclui o cabeçalho e o layout principal
+    // Inclui o cabeçalho do layout
     require __DIR__ . '/header.php';
 
     // Inclui o conteúdo da view específica
-    $fullPath = __DIR__ . '/../app/views/' . $path;
-    require $fullPath;
+    require __DIR__ . '/../app/views/' . $path;
 
-    // Inclui o rodapé
+    // Inclui o rodapé do layout
     require __DIR__ . '/footer.php';
 }
 

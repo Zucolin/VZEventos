@@ -1,22 +1,34 @@
 <h2>Criar Evento</h2>
 <form method="post" action="<?php echo BASE_URL; ?>/eventos/create">
-    <label>Nome</label>
-    <input type="text" name="nome" required placeholder="Nome do Evento">
+    <div class="form-group">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" required placeholder="Nome do Evento">
+    </div>
 
-    <label>Descrição</label>
-    <textarea name="descricao" rows="4" required placeholder="Descreva os detalhes do evento..."></textarea>
+    <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao" name="descricao" rows="4" required placeholder="Descreva os detalhes do evento..."></textarea>
+    </div>
 
-    <label>Data</label>
-    <input type="date" name="data" required>
+    <div class="form-group">
+        <label for="data">Data</label>
+        <input type="date" id="data" name="data" required>
+    </div>
 
-    <label>Horário</label>
-    <input type="time" name="horario" required>
+    <div class="form-group">
+        <label for="horario">Horário</label>
+        <input type="time" id="horario" name="horario" required>
+    </div>
 
-    <label>Local</label>
-    <input type="text" name="local" required placeholder="Endereço ou link do evento">
+    <div class="form-group">
+        <label for="local">Local</label>
+        <input type="text" id="local" name="local" required placeholder="Endereço ou link do evento">
+    </div>
 
-    <label>Máx. Participantes</label>
-    <input type="number" name="max_participantes" required placeholder="Ex: 100">
+    <div class="form-group">
+        <label for="max_participantes">Máx. Participantes</label>
+        <input type="number" id="max_participantes" name="max_participantes" required placeholder="Ex: 100">
+    </div>
 
     <button type="submit" class="btn">Salvar</button>
 </form>

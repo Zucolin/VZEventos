@@ -1,0 +1,474 @@
+/*
+  File: estilo.css
+  Theme: VZ Eventos - Futurist Neon
+  Description: A complete visual overhaul for the VZ Eventos system,
+               implementing a dark, futuristic design with neon purple
+               accents, glassmorphism, and glow effects.
+*/
+
+/* -------------------------
+   1. :root - Design System Variables
+------------------------- */
+:root {
+  /* Color Palette */
+  --bg-base: #05060F; /* Deep space blue/black */
+  --bg-panel: rgba(22, 20, 44, 0.45); /* Glassmorphism panel background */
+  --text-primary: #f0f2ff; /* Slightly off-white for better readability */
+  --text-secondary: rgba(240, 242, 255, 0.75); /* For subtitles and secondary info */
+  --text-muted: rgba(240, 242, 255, 0.55); /* For less important text */
+
+  /* Accent Colors (Neon Purple) */
+  --accent-purple-1: #7b2cff; /* Brightest purple */
+  --accent-purple-2: #a855f7; /* Mid purple */
+  --accent-purple-3: #6d28d9; /* Deep purple */
+  --accent-border: rgba(168, 85, 247, 0.25); /* Subtle border for panels */
+  --accent-border-hover: rgba(123, 44, 255, 0.6);
+
+  /* Gradients & Effects */
+  --accent-gradient: linear-gradient(135deg, var(--accent-purple-1), var(--accent-purple-2));
+  --glow-purple: 0 0 28px rgba(123, 44, 255, 0.5);
+  --glow-purple-intense: 0 0 38px rgba(168, 85, 247, 0.7);
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.2);
+  --shadow-purple: 0 15px 35px rgba(60, 25, 130, 0.2);
+
+  /* Sizing & Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --radius-md: 12px; /* For inputs, smaller elements */
+  --radius-lg: 20px; /* For panels, cards */
+  --radius-pill: 999px; /* For buttons, navbar */
+
+  /* Transitions */
+  --transition-fast: all 0.2s ease-in-out;
+  --transition-smooth: all 0.3s ease;
+}
+
+/* -------------------------
+   2. Global & Reset
+------------------------- */
+* {
+  box-sizing: border-box;
+  outline: none;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text-primary);
+  background: radial-gradient(circle at 15% 15%, rgba(123, 44, 255, 0.18), transparent 30%),
+              radial-gradient(circle at 85% 20%, rgba(168, 85, 247, 0.12), transparent 35%),
+              radial-gradient(circle at 50% 80%, rgba(109, 40, 217, 0.1), transparent 40%),
+              var(--bg-base);
+  font-family: "Poppins", "Inter", system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* -------------------------
+   3. Typography
+------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-md);
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+p {
+  margin: 0 0 var(--spacing-md);
+  color: var(--text-secondary);
+}
+
+a {
+  color: var(--accent-purple-2);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+a:hover {
+  color: var(--accent-purple-1);
+  text-shadow: 0 0 8px var(--accent-purple-1);
+}
+
+/* -------------------------
+   4. Layout & Containers
+------------------------- */
+.container {
+  width: min(1280px, 94vw);
+  margin: 0 auto;
+  padding: var(--spacing-lg) 0 var(--spacing-xl);
+}
+
+.panel {
+  padding: var(--spacing-lg);
+  background: var(--bg-panel);
+  border: 1px solid var(--accent-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-purple);
+  transition: var(--transition-smooth);
+  margin-bottom: var(--spacing-lg);
+}
+
+.panel:hover {
+  border-color: var(--accent-border-hover);
+  box-shadow: var(--shadow-purple), var(--glow-purple);
+}
+
+/* Ensures spacing before buttons in a panel */
+.panel .btn, .panel .button {
+  margin-top: var(--spacing-lg);
+}
+
+/* -------------------------
+   5. Navbar
+------------------------- */
+.navbar {
+  position: sticky;
+  top: var(--spacing-md);
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-md);
+  width: min(1200px, 94vw);
+  margin: 0 auto var(--spacing-xl);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: rgba(18, 16, 38, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-pill);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-soft), var(--glow-purple);
+  transition: var(--transition-smooth);
+}
+
+.nav-logo a {
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0 var(--spacing-sm);
+}
+
+.nav-logo a:hover {
+  color: var(--text-primary); /* Override generic link hover */
+  text-shadow: 0 0 12px rgba(168, 85, 247, 0.8);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-pill);
+}
+
+.nav-links a:hover {
+  color: #fff;
+  background: rgba(123, 44, 255, 0.15);
+  text-shadow: none; /* Remove generic link shadow */
+}
+
+/* -------------------------
+   6. Buttons
+------------------------- */
+.btn, .button {
+  display: inline-block;
+  border: 0;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: var(--radius-pill);
+  padding: 0.7rem 1.5rem;
+  text-align: center;
+  color: #fff !important;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+  background-image: var(--accent-gradient);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2), 0 0 20px rgba(123, 44, 255, 0.5);
+}
+
+.btn:hover, .button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3), var(--glow-purple-intense);
+}
+
+/* Outline Button Variant */
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--accent-purple-3);
+  color: var(--text-secondary) !important;
+  box-shadow: none;
+}
+
+.btn-outline:hover {
+  background: rgba(123, 44, 255, 0.15);
+  border-color: var(--accent-purple-2);
+  color: #fff !important;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(123, 44, 255, 0.4);
+}
+
+/* -------------------------
+   7. Tables
+------------------------- */
+.table-wrapper {
+  overflow-x: auto;
+  background: var(--bg-panel);
+  border: 1px solid var(--accent-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-sm) var(--spacing-lg) var(--spacing-lg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-purple);
+  margin: var(--spacing-xl) 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  color: var(--text-secondary);
+  background: transparent;
+}
+
+table thead th {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--accent-purple-2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 2px solid var(--accent-purple-3);
+}
+
+table tbody tr {
+  border-bottom: 1px solid rgba(190, 163, 255, 0.1);
+  transition: background-color var(--transition-fast);
+}
+
+table tbody tr:last-child {
+  border-bottom: none;
+}
+
+table tbody td {
+  padding: var(--spacing-md) var(--spacing-lg);
+  vertical-align: middle;
+}
+
+table tbody tr:hover {
+  background-color: rgba(123, 44, 255, 0.08);
+}
+
+/* Styles for action links within tables */
+table .actions {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+table .actions a {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: var(--transition-fast);
+}
+
+.actions .edit {
+  color: #60a5fa; /* A contrasting blue */
+  background-color: rgba(96, 165, 250, 0.1);
+}
+.actions .edit:hover {
+  color: #fff;
+  background-color: rgba(96, 165, 250, 0.3);
+  text-shadow: none;
+}
+
+.actions .delete {
+  color: #f87171; /* A contrasting red */
+  background-color: rgba(248, 113, 113, 0.1);
+}
+.actions .delete:hover {
+  color: #fff;
+  background-color: rgba(248, 113, 113, 0.3);
+  text-shadow: none;
+}
+
+.actions .info {
+  color: #c084fc; /* A lighter purple */
+  background-color: rgba(192, 132, 252, 0.1);
+}
+.actions .info:hover {
+  color: #fff;
+  background-color: rgba(192, 132, 252, 0.3);
+  text-shadow: none;
+}
+
+/* -------------------------
+   8. Forms
+------------------------- */
+.form-group {
+  margin-bottom: var(--spacing-xl); /* Aumenta o espaço entre os campos */
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+  font-size: 0.9rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: rgba(30, 32, 50, 0.6);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 1rem;
+  transition: var(--transition-smooth);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent-purple-1);
+  box-shadow: 0 0 15px rgba(123, 44, 255, 0.5);
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23a855f7' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+}
+
+option {
+  background-color: #05060F;
+  color: #fff;
+}
+
+/* Adiciona espaço antes do botão de submit nos formulários */
+form > .btn, form > .button {
+    margin-top: var(--spacing-lg);
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* -------------------------
+   9. Responsividade
+------------------------- */
+@media (max-width: 768px) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+
+  .navbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+  }
+
+  .nav-links {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .navbar .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: var(--spacing-md) 0;
+  }
+
+  .navbar {
+    top: var(--spacing-sm);
+  }
+
+  .btn, .button {
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+  }
+
+  table thead {
+    display: none; /* Hide table head on small screens */
+  }
+
+  table, table tbody, table tr, table td {
+    display: block;
+    width: 100%;
+  }
+
+  table tr {
+    margin-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--accent-purple-3);
+  }
+  table tr:last-child {
+    border-bottom: 2px solid var(--accent-purple-3);
+  }
+
+  table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+    border-bottom: 1px solid rgba(190, 163, 255, 0.1);
+  }
+  table td:last-child {
+    border-bottom: 0;
+  }
+
+  table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: var(--spacing-md);
+    width: calc(50% - var(--spacing-lg));
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+  }
+}
