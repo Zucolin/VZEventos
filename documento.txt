@@ -1,0 +1,81 @@
+================================================================================
+                        DOCUMENTAÇÃO - SISTEMA VZ EVENTOS 
+================================================================================
+
+Este documento descreve a estrutura arquitetural e as principais classes do 
+sistema VZ Eventos, desenvolvido utilizando o padrão MVC (Model-View-Controller)
+sem o uso de frameworks externos.
+
+--------------------------------------------------------------------------------
+1. ESTRUTURA MVC
+--------------------------------------------------------------------------------
+
+A aplicação segue o padrão MVC para separar a lógica de negócios, a interface do 
+usuário e o controle de fluxo.
+
+[FRONT CONTROLLER] - public/index.php
+   - Ponto de entrada único da aplicação.
+   - Intercepta todas as requisições HTTP.
+   - Realiza o roteamento (identifica qual Controller e Ação executar).
+   - Gerencia a injeção de dependências e configurações globais.
+   - Define a função 'view()' para renderização padronizada de templates.
+
+[MODEL] - app/Models/
+   - Representa a camada de dados e regras de negócios.
+   - Interage diretamente com o banco de dados (MySQL) via PDO.
+   - Responsável pela validação de dados antes da persistência.
+
+[VIEW] - app/Views/
+   - Responsável pela apresentação visual (HTML/CSS).
+   - Não contém lógica de negócios complexa.
+   - Recebe dados dos Controllers para exibição dinâmica.
+   - Organizada em subpastas por entidade (eventos, participantes, inscricoes).
+
+[CONTROLLER] - app/Controllers/
+   - Atua como intermediário entre Model e View.
+   - Recebe as requisições do Front Controller.
+   - Instancia Models para buscar ou salvar dados.
+   - Carrega a View apropriada para exibir a resposta ao usuário.
+
+--------------------------------------------------------------------------------
+2. DESCRIÇÃO DAS PRINCIPAIS CLASSES
+--------------------------------------------------------------------------------
+
+>>> CONTROLLERS (app/Controllers/)
+
+   1. EventoController
+      - Gerencia o ciclo de vida dos Eventos.
+      - Métodos: index() [listar], create() [criar], edit() [editar], 
+        delete() [excluir].
+
+   2. ParticipanteController
+      - Gerencia o cadastro de usuários/participantes.
+      - Métodos: index(), create(), edit(), delete().
+
+   3. InscricaoController
+      - Gerencia a associação entre Eventos e Participantes.
+      - Métodos: 
+         * create(): Realiza a inscrição, validando lotação e duplicidade.
+         * listByEvent(): Exibe lista de participantes de um evento específico.
+         * delete(): Cancela uma inscrição.
+
+>>> MODELS (app/Models/)
+
+   1. Evento
+      - Mapeia a tabela 'eventos'.
+      - Atributos: nome, descricao, data, horario, local, max_participantes.
+      - Métodos CRUD padrão.
+
+   2. Participante
+      - Mapeia a tabela 'participantes'.
+      - Atributos: nome, email, telefone.
+
+   3. Inscricao
+      - Mapeia a tabela 'inscricoes'.
+      - Lógica de Negócio Específica:
+         * isAlreadyRegistered(): Impede inscrição duplicada do mesmo usuário.
+         * isEventFull(): Verifica se a capacidade do evento foi atingida.
+         * getParticipantsByEvent(): Retorna dados detalhados (JOIN) dos 
+           inscritos.
+
+================================================================================
