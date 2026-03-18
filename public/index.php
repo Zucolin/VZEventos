@@ -18,12 +18,15 @@ function view($path, $data = []) {
     // Transforma as chaves do array em variáveis (ex: $data['stmt'] vira $stmt).
     extract($data);
 
-    // Constrói o caminho completo para o arquivo da view.
-    // A pasta é 'views' (minúsculo) com base nos arquivos de contexto.
-    $fullPath = __DIR__ . '/../app/views/' . $path;
+    // Inclui o cabeçalho e o layout principal
+    require __DIR__ . '/header.php';
 
-    // Inclui o arquivo da view.
+    // Inclui o conteúdo da view específica
+    $fullPath = __DIR__ . '/../app/views/' . $path;
     require $fullPath;
+
+    // Inclui o rodapé
+    require __DIR__ . '/footer.php';
 }
 
 // Define a URL base da aplicação para construir links e redirecionamentos de forma segura.

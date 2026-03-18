@@ -1,7 +1,3 @@
-<?php
-ob_start();
-?>
-
 <h2>Participantes</h2>
 <a href="<?php echo BASE_URL; ?>/participantes/create" class="btn">Novo Participante</a>
 <table>
@@ -16,19 +12,14 @@ ob_start();
     <tbody>
         <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
         <tr>
-            <td><?php echo $row['nome']; ?></td>
-            <td><?php echo $row['email']; ?></td>
-            <td><?php echo $row['telefone']; ?></td>
+            <td><?php echo htmlspecialchars($row['nome']); ?></td>
+            <td><?php echo htmlspecialchars($row['email']); ?></td>
+            <td><?php echo htmlspecialchars($row['telefone']); ?></td>
             <td>
-                <a href="<?php echo BASE_URL; ?>/participantes/edit/<?php echo $row['id']; ?>">Editar</a>
-                <a href="<?php echo BASE_URL; ?>/participantes/delete/<?php echo $row['id']; ?>">Excluir</a>
+                <a href="<?= BASE_URL ?>/participantes/edit/<?= $row['id'] ?>">Editar</a>
+                <a href="<?= BASE_URL ?>/participantes/delete/<?= $row['id'] ?>" onclick="return confirm('Tem certeza que deseja excluir este participante?');">Excluir</a>
             </td>
         </tr>
         <?php endwhile; ?>
     </tbody>
 </table>
-
-<?php
-$content = ob_get_clean();
-include __DIR__ . '/../layout.php';
-?>
